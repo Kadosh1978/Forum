@@ -1,7 +1,5 @@
 {% extends 'flatpages/default.html' %}
 
-{% load custom_filters %}
-{% load custom_tags %}
 
 {% block title %}
 Posts
@@ -9,10 +7,10 @@ Posts
 
 {% block content %}
 
-   <h1>All posts</h1>
+   <h1>Все посты</h1>
 
-   <td><button><a href="{% url 'post_create'%}">Создать новость</a></button></td>
-   <td><button><a href="{% url 'articles_create'%}">Создать статью</a></button></td>
+   <td><button><a href="{% url 'post_create'%}">Создать пост</a></button></td>
+ 
 
    <hr>
    {% if posts %}
@@ -53,28 +51,11 @@ Posts
 
        </table>
    {% else %}
-       <h2>Товаров нет!</h2>
+       <h2>Нет постов!</h2>
 
       {% endif %}
 
    {# Добавляем пагинацию на страницу #}
 
-   {% if page_obj.has_previous %}
-   {# Для каждой ссылки пагинации указываем обработку через новый тег #}
-   <a href="?{% url_replace page=1 %}">1</a>
-   {% if page_obj.previous_page_number != 1 %}
-       ...
-       <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
-   {% endif %}
-{% endif %}
 
-{{ page_obj.number }}
-
-{% if page_obj.has_next %}
-   <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
-   {% if paginator.num_pages != page_obj.next_page_number %}
-       ...
-       <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
-   {% endif %}
-{% endif %}
 {% endblock content %}

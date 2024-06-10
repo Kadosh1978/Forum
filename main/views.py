@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Category, Post
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from main.forms import PostForm
 
 
 
@@ -20,3 +21,12 @@ class PostList(ListView):
     # Это имя списка, в котором будут лежать все объекты.
     # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
     context_object_name = 'posts'
+    paginate_by = 10
+# class PostCreate(PermissionRequiredMixin, CreateView):
+class PostCreate(CreateView):
+    # Указываем нашу разработанную форму
+    form_class = PostForm
+    # модель товаров
+    model = Post
+    # и новый шаблон, в котором используется форма.
+    template_name = 'create.html'
