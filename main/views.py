@@ -22,8 +22,8 @@ class PostList(ListView):
     # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
     context_object_name = 'posts'
     paginate_by = 10
-# class PostCreate(PermissionRequiredMixin, CreateView):
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
+# class PostCreate(CreateView):
     # Указываем нашу разработанную форму
     form_class = PostForm
     # модель товаров
