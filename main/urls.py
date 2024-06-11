@@ -7,6 +7,7 @@ urlpatterns = [
 
    path('', (PostList.as_view()), name='post_list'),
    path('main/create/', PostCreate.as_view(), name='post_create'),
+   
 
 ]
 
