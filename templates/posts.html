@@ -2,7 +2,7 @@
 
 
 {% block title %}
-Posts
+Forum main page
 {% endblock title %}
 
 {% block content %}
@@ -15,22 +15,22 @@ Posts
    <hr>
    {% if posts %}
        <table>
-           <tr> 
-               <td><b>Время</b></td>
-               <td><b>Заголовок</b></td>
-               <td><b>Статья</b></td>
-               <td><b>Тип текста</b></td>
-               <td><b>Тип категории</b></td>
+        <tr> 
+            <td><b>Время</b></td>
+            <td><b>Заголовок</b></td>
+            <td><b>Статья</b></td>
+            {% comment %} <td><b>Тип текста</b></td> {% endcomment %}
+            <td><b>Категория объявления</b></td>
 
-           </tr>
+        </tr>
 
            {% for new in posts %}
            <tr>
 
                <td>{{ new.time_in|date:'d M Y' }}</td>
-               <td>{{ new.head }}</td>
-               <td><a href="{% url 'post_detail' new.id %}"> {{ new.text|truncatechars:20}}</a></td>
-               <td>{{ new.post_type}}</td>
+               <td><a href="{% url 'post_detail' new.id %}">{{ new.head }}</td>
+               <td>{{ new.text|truncatechars:20}}</a></td>
+               {% comment %} <td>{{ new.post_type}}</td> {% endcomment %}
                <td>
                 {% for cat in new.category.all %}
                     {{ cat }}

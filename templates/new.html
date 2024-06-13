@@ -1,0 +1,43 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+
+Forum
+
+
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
+{% block content %}
+
+<h1>Объявление</h1>
+<table>
+    <tr>
+        <td><b>Время</b></td>
+        <td><b>Заголовок</b></td>
+        <td><b>Статья</b></td>
+        <td><b>Категория объявления</b></td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>{{ new.time_in|date:'d M Y' }}</td>
+        <td>{{ new.head }}</td>
+        <td>{{ new.text }}</td>
+         <td>
+            {% for cat in new.category.all %}
+                {{ cat }}
+            {% endfor %}
+        </td>
+        {% comment %} <td><button><a href="{% url 'post_update' new.id %}">Редактировать</a></button></td>
+        <td><button><a href="{% url 'post_delete' new.id %}">Удалить</a></button></td> {% endcomment %}
+
+    </tr>
+
+
+</table>
+
+{% endblock content %}

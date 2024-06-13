@@ -23,10 +23,18 @@ class PostList(ListView):
     context_object_name = 'posts'
     paginate_by = 10
 class PostCreate(LoginRequiredMixin, CreateView):
-# class PostCreate(CreateView):
-    # Указываем нашу разработанную форму
+
     form_class = PostForm
-    # модель товаров
     model = Post
-    # и новый шаблон, в котором используется форма.
     template_name = 'create.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.author = self.request.user
+        post.save()
+        return super().form_valid(form)
+
+class PostDetail(DetailView):
+    model = Post
+    template_name = 'new.html'
+    context_object_name = 'new'    

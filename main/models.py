@@ -2,12 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-class Author(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        return self.user.username
 
 class Category(models.Model):
     category_type = models.CharField(max_length = 255, unique = True)
@@ -19,7 +13,7 @@ class Category(models.Model):
     
 class Post(models.Model):
     time_in = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(Author, on_delete = models.CASCADE)
+    author = models.ForeignKey(User, on_delete = models.CASCADE)
     head = models.CharField(max_length = 255, unique = True)
     text = models.TextField()
     category = models.ManyToManyField(Category, through="PostCategory")
