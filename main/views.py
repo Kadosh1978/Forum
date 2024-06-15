@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views import View
@@ -7,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Category, Post
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from main.forms import PostForm
-
+from main.models import User
 
 
 class PostList(ListView):
@@ -37,4 +38,21 @@ class PostCreate(LoginRequiredMixin, CreateView):
 class PostDetail(DetailView):
     model = Post
     template_name = 'new.html'
-    context_object_name = 'new'    
+    context_object_name = 'new'
+
+class ConfirmUser(UpdateView):
+    model = User
+    context_object_name ='confirm_user'
+
+    def post(self, request, *args, **kwargs):
+        if 'code' in request.POST:
+            user = User.objects.filter(code=request.POST['code'])
+            if user.exists():
+                user.update(is_active =True)
+                user.update(code=None)
+            else:
+                return render(self.request, 'main/invalid_code.html')
+        return redirect('account_login')
+    
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'main/profile.html'

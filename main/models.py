@@ -1,7 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractBaseUser
 from django.urls import reverse
 
+class User(AbstractBaseUser):
+    code = models.CharField(max_length=15, blank=True, null=True)
 
 class Category(models.Model):
     category_type = models.CharField(max_length = 255, unique = True)
