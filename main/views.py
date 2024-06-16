@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
@@ -51,8 +51,8 @@ class ConfirmUser(UpdateView):
                 user.update(is_active =True)
                 user.update(code=None)
             else:
-                return render(self.request, 'main/invalid_code.html')
+                return render(self.request, 'users/invalid_code.html')
         return redirect('account_login')
     
 class ProfileView(LoginRequiredMixin, TemplateView):
-    template_name = 'main/profile.html'
+    template_name = 'main/posts.html'

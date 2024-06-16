@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -145,9 +147,16 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+EMAIL_HOST = 'EMAIL_HOST'
+EMAIL_PORT = 'EMAIL_PORT' 
+EMAIL_HOST_USER = 'EMAIL_HOST_USER' 
+EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'  # пароль от почты
+EMAIL_USE_SSL = True 
+DEFAULT_FROM_EMAIL = 'DEFAULT_FROM_EMAIL'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODE = 'main.User'
+AUTH_USER_MODEL = 'main.User'
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/sign/logout/'
