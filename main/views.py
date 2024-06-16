@@ -5,9 +5,9 @@ from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.decorators import login_required
 
-from .models import Category, Post
+from .models import Category, Post, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from main.forms import PostForm
+from main.forms import PostForm, CommentForm
 from main.models import User
 
 
@@ -28,6 +28,17 @@ class PostCreate(LoginRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
     template_name = 'create.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.author = self.request.user
+        post.save()
+        return super().form_valid(form)
+class PostComment(LoginRequiredMixin, CreateView):
+
+    form_class = CommentForm
+    model = Comment
+    template_name = 'comment.html'
 
     def form_valid(self, form):
         post = form.save(commit=False)

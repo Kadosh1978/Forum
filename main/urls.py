@@ -9,6 +9,7 @@ urlpatterns = [
    path('main/create/', PostCreate.as_view(), name='post_create'),
    path('main/<int:pk>/new/', PostDetail.as_view(), name='post_detail'),
    path('main/posts/', ConfirmUser.as_view(), name='confirm_user'),
+   path('main/<int:pk>/comment/', PostCreate.as_view(), name='post_comment'),
 
    
 

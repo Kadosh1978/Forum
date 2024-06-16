@@ -6,6 +6,10 @@ from django.conf import settings
 from django.core.mail import send_mail
 import random
 
+class CommentForm(forms.ModelForm):
+   class Meta:
+       model = Post
+       fields =  ['head', 'text']
 
 class PostForm(forms.ModelForm):
    class Meta:

@@ -39,4 +39,4 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete = models.CASCADE)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     text = models.TextField()
-    rating = models.IntegerField(default=0)
+    
