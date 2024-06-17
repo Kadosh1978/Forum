@@ -41,9 +41,10 @@ class PostComment(LoginRequiredMixin, CreateView):
     template_name = 'comment.html'
 
     def form_valid(self, form):
-        post = form.save(commit=False)
-        post.author = self.request.user
-        post.save()
+        comment = form.save(commit=False)
+        comment.user = self.request.user
+        comment.post = Post.objects.get(pk=self.kwargs['pk'])
+        comment.save()
         return super().form_valid(form)
 
 class PostDetail(DetailView):

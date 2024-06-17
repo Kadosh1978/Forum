@@ -9,7 +9,7 @@ import random
 class CommentForm(forms.ModelForm):
    class Meta:
        model = Post
-       fields =  ['head', 'text']
+       fields =  ['text']
 
 class PostForm(forms.ModelForm):
    class Meta:
